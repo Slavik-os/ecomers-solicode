@@ -56,17 +56,43 @@ body {
   font-size:12px;
 }
 .description-card ,.detail-card{
-  color : #000;
-  font-size: 15px;
-  font-weight : bolder;
+  color : #fff;
+  font-size: 13px;
+  font-weight : light;
   text-decoration:underline;
   padding:20px;
 }
 .detail-card {
-  font-size:20px;
+  font-size:15px;
   color : #d8383;
 }
+.dropdown-item:hover {
+  color :#000 !important;
+}
+.left-col,.right-col {
+  padding: 0 20px ;
+  width:100%;
+  height:100%;
+  background : #000;
+}
+.right-col {
+  background:blue;
+}
+.details_button {
+  
+  color : #fff;
+  font-size:20px;
+}
 
+.black-holder {
+  background :#000;
+  width:100%;
+  color :#fff;
+}
+.white-holder {
+  color :#fff;
+
+}
 </style>
 <!-- nav-bar -->
 
@@ -152,7 +178,7 @@ let close_login = ()=>{
 
 function record_append(data){
   // create and append Elements
-  
+
   let main = document.getElementById("main");
   let row = document.createElement("div");
   row.className += '';
@@ -165,7 +191,7 @@ function record_append(data){
 
   let div_card = document.createElement("div");
   div_card.classList.add("card");
-  div_card.className +=' h-50';
+  div_card.className +=' h-50 black-holder';
   div_parent.appendChild(div_card);
 
   let img = document.createElement("img");
@@ -174,25 +200,39 @@ function record_append(data){
   div_card.appendChild(img);
 
   let card_body = document.createElement("div");
-  card_body.className += ' card-body';
+  card_body.className += ' card-body text-center black-holder';
   div_card.appendChild(card_body);
 
 
   let h5 = document.createElement("span");
   h5.innerText = data.libelle;
   h5.className=' text-center description-card'
-  div_card.appendChild(h5);
+  card_body.appendChild(h5);
 
   let p = document.createElement("p");
-  p.className+= ' card-text detail-card text-center';
+  p.className+= ' card-text detail-card text-center white-holder';
   p.innerText = data.prix+' ,00$';
-  div_card.appendChild(p);
+  card_body.appendChild(p);
 
   // Create Buttons :
 
+  let rowButtons = document.createElement("div");
+  rowButtons.className +=' row';
+  card_body.appendChild(rowButtons);
 
+  let col_details = document.createElement("div");
+  col_details.className+=' col-4';
+  col_details.innerHTML = `
+   <i class="fa-solid fa-eye"></i> <span style='color:#ddd'>Details</span>
+  `;
+  rowButtons.appendChild(col_details);
 
-
+  let col_add = document.createElement("div");
+  col_add.className+=' col-6';
+  col_add.innerHTML =`
+  <i class="fa-solid fa-cart-arrow-down"></i><span style='color:#ddd'>Add to Cart</span>
+  `;
+  rowButtons.appendChild(col_add);
 
 
 }

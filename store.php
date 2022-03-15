@@ -55,6 +55,18 @@ body {
   color:#fff!important;
   font-size:12px;
 }
+.description-card ,.detail-card{
+  color : #000;
+  font-size: 15px;
+  font-weight : bolder;
+  text-decoration:underline;
+  padding:20px;
+}
+.detail-card {
+  font-size:20px;
+  color : #d8383;
+}
+
 </style>
 <!-- nav-bar -->
 
@@ -114,6 +126,17 @@ body {
 <!-- nav-bar-end -->
 
 
+<main id="">
+            <div class="row row-cols-1 row-cols-md-4 g-4 px-5" id="main"> </div>
+          
+
+
+</main>
+
+
+
+
+
 
 
 <script src=" https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js " integrity=" sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo " crossorigin=" anonymous "></script>
@@ -123,11 +146,67 @@ body {
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
-
 let close_login = ()=>{
-  console.log('working');
     document.getElementById("login_box").style.display="None";
 }
+
+function record_append(data){
+  // create and append Elements
+  
+  let main = document.getElementById("main");
+  let row = document.createElement("div");
+  row.className += '';
+  main.appendChild(row);
+
+
+  let div_parent = document.createElement("div");
+  div_parent.classList.add("col");
+  row.appendChild(div_parent);
+
+  let div_card = document.createElement("div");
+  div_card.classList.add("card");
+  div_card.className +=' h-50';
+  div_parent.appendChild(div_card);
+
+  let img = document.createElement("img");
+  img.src=data.image;
+  img.className +=' img-card card-img-top'
+  div_card.appendChild(img);
+
+  let card_body = document.createElement("div");
+  card_body.className += ' card-body';
+  div_card.appendChild(card_body);
+
+
+  let h5 = document.createElement("span");
+  h5.innerText = data.libelle;
+  h5.className=' text-center description-card'
+  div_card.appendChild(h5);
+
+  let p = document.createElement("p");
+  p.className+= ' card-text detail-card text-center';
+  p.innerText = data.prix+' ,00$';
+  div_card.appendChild(p);
+
+  // Create Buttons :
+
+
+
+
+
+
+}
+
+fetch('inc/products_oop.php')
+  .then(response => response.json())
+  .then((data)=>{
+    for (let i=0; i < data.length ; i++){
+      record_append(data[i]);
+    }
+  });
+
+
+
 </script>
 </body>
 </html>

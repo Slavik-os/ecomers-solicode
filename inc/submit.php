@@ -13,6 +13,7 @@ class Costumor{
     public function __construct(){
        $this-> conn = mysqli_connect($this-> host,$this-> user,
                        $this-> password,$this->db);
+        
    }
    
    public function create_user(
@@ -34,7 +35,6 @@ class Costumor{
                             $this->row = mysqli_fetch_array($this->result);
                             if ($this->row !=Null){
                                 header("Location:../signup.php?error=Email exists !,chose a new one");
-                                echo 'exists';
                             }
                             // check end
                             else {
@@ -76,7 +76,6 @@ class Costumor{
 		$_SESSION['firstname'] = $this->row['firstname'];
 
 	}else {
-           echo 'not found';
 		header("Location:../index.php?error=no records found !");
 	}
    }
@@ -106,8 +105,7 @@ if(isset($_POST['register'])){
 if(isset($_POST['login'])){
     $email =$_POST['email_user'] ; 
     $password = md5(test_input($_POST['password']));
-    $costumor->user_login($email,$password);
-    
+    $costumor->user_login($email,$password);   
 }
 
 

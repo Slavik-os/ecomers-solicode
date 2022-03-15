@@ -109,7 +109,7 @@
     <fieldset>
         <div class="form-group row"> 
             <div class="col-md-5">
-                <input type="text" class="form-control input-login" style="" id="exampleInputEmail1" name="firstname" placeholder="first name" >
+                <input type="text" class="form-control input-login" style="" id="exampleInputEmail1" name="firstname" placeholder="first name" required>
             </div>
             <div class="col-md-5">
                 <input type="text" class="form-control input-login" style="" id="exampleInputEmail1" name="lastname" aria-describedby="emailHelp" placeholder="last name">
@@ -129,7 +129,8 @@
                 <input type="email" class="form-control input-login" style="" id="email" name="email" placeholder="email" requied>
             </div>
             <div class="col-md-5">
-                <input type="password" class="form-control input-login" style="" id="password" name="password" placeholder="password"  >
+                <input type="password" class="form-control input-login" style="" id="password" name="password" placeholder="password" title="1char.2numbers .."  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$
+" required>
             </div>
         </div>
         <div class="form-group row"> 

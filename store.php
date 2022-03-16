@@ -93,6 +93,19 @@ body {
   color :#fff;
 
 }
+.button_hero {
+  cursor : pointer;
+}
+.modal-bg {
+  background : #000 !important;
+}
+#detail-libelle , #detail-description ,#detail-prix{
+  color :#fff;
+}
+#detail-prix {
+  font-size:16px;
+  font-weight : bolder;
+}
 </style>
 <!-- nav-bar -->
 
@@ -151,14 +164,34 @@ body {
 </nav>
 <!-- nav-bar-end -->
 
-
 <main id="">
             <div class="row row-cols-1 row-cols-md-4 g-4 px-5" id="main"> </div>
-          
-
-
 </main>
 
+<!-- Modal Hero -->
+
+<div class="modal fade bd-example-modal-lg modal-bg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content modal-bg">
+      <div class="row">
+        <div class="col-lg-5 img-detail-holder">
+          <img id="img-modal" src="" alt="">
+        </div>
+        <div class="col-lg-5">
+            <span id="detail-libelle"></span>
+            <div class="row mt-4">
+              <span id="detail-description"></span>
+            </div>
+            <div class="row mt-4">
+              <span id="detail-prix"></span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal end -->
 
 
 
@@ -221,30 +254,39 @@ function record_append(data){
   card_body.appendChild(rowButtons);
 
   let col_details = document.createElement("div");
-  col_details.className+=' col-4';
+  col_details.className+=' col-4 button_hero';
+
+  col_details.setAttribute("onclick",'details('+data.idProduit+')'); // details Function
+  col_details.setAttribute("data-toggle","modal");
+  col_details.setAttribute("data-target",".bd-example-modal-lg");
   col_details.innerHTML = `
    <i class="fa-solid fa-eye"></i> <span style='color:#ddd'>Details</span>
   `;
   rowButtons.appendChild(col_details);
 
   let col_add = document.createElement("div");
-  col_add.className+=' col-6';
+  col_add.className+=' col-6 button_hero';
   col_add.innerHTML =`
   <i class="fa-solid fa-cart-arrow-down"></i><span style='color:#ddd'>Add to Cart</span>
   `;
   rowButtons.appendChild(col_add);
-
-
 }
-
+let data_global ;
 fetch('inc/products_oop.php')
   .then(response => response.json())
   .then((data)=>{
     for (let i=0; i < data.length ; i++){
       record_append(data[i]);
+      data_global = data;
     }
   });
-
+let details = (id)=>{
+  let found = data_global.find(e => e.idProduit == id); // find product object
+  document.getElementById("img-modal").src= found.image;
+  document.getElementById("detail-libelle").innerText = found.libelle;
+  document.getElementById("detail-description").innerText = found.description;
+  document.getElementById("detail-prix").innerText = found.prix+' ,00$';
+}
 
 
 </script>

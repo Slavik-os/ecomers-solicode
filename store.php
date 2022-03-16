@@ -106,6 +106,10 @@ body {
   font-size:16px;
   font-weight : bolder;
 }
+
+.move-panel {
+  right : 500px !important;
+}
 </style>
 <!-- nav-bar -->
 
@@ -138,31 +142,117 @@ body {
       <li class="nav-item">
         <a class="nav-link" href="store.php">STORE</a>
       </li>
+     
       <?php
             if(isset($_SESSION['firstname'])){
                 echo '
-                
+                <li class="nav-link">
+                <a class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg2">
+                  <i class="fas fa-shopping-cart"></i> prodcuts </a>
+                </li>
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                  | '.$_SESSION['firstname'].'
                 </a>
-                <div class="dropdown-menu pr-5 bg-black" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu pr-5 bg-black mr-5" style="margin-right : 20px" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="inc/logout.php">logout</a>
                   <div class="dropdown-divider"></div>
                 </div>
               </li>
-                
                 ';
             }
           ?>     
-      <li class="nav-link"><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-      <li></li>
-      <li></li>
+    
     </ul>
     </form>
   </div>
 </nav>
+<div class="modal fade bd-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content modal-bg">
+              <!-- <?php
+                include 'inc/config.php';
+                 $sql = "SELECT * FROM detailscommande";
+                 $result = mysqli_query($conn,$sql);
+                 while($row = mysqli_fetch_assoc($result)){
+                    echo '
+                      <div>
+                    ';
+                 }
+              ?> -->
+            <div class="row border-top my-5">
+                <div class="col-md-4">
+                  <img src="products/71OgZCo4YZL 1.png" alt="">
+                </div>
+                <div class="col-md-6">
+                Products Name 
+                  <div class="row my-5">
+                    <div class="col-md-2">
+                    <input type="number" style=" width: 80px;" min="0" max="10" onkeydown="javascript: return event.keyCode == 69 ? false : true" />
+                    </div>
+                  </div>
+                  <div class="row my-5">
+                    <div class="col-md-2">
+                      <button type="button" class="btn btn-danger">Danger</button>
+ 
+                  </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="row border-top  my-5">
+                <div class="col-md-4">
+                  <img src="products/71OgZCo4YZL 1.png" alt="">
+                </div>
+                <div class="col-md-6">
+                Products Name 
+                  <div class="row my-5">
+                    <div class="col-md-2">
+                    <input type="number" style=" width: 80px;" min="0" max="10" onkeydown="javascript: return event.keyCode == 69 ? false : true" />
+                    </div>
+                  </div>
+                  <div class="row my-5">
+                    <div class="col-md-2">
+                      <button type="button" class="btn btn-danger">Danger</button>
+ 
+                  </div>
+                  </div>
+                </div>
+            </div>
+            <div class="row border-top  my-5">
+                <div class="col-md-4">
+                  <img src="products/71OgZCo4YZL 1.png" alt="">
+                </div>
+                <div class="col-md-6">
+                Products Name 
+                  <div class="row my-5">
+                    <div class="col-md-2">
+                    <input type="number" style=" width: 80px;" min="0" max="10" onkeydown="javascript: return event.keyCode == 69 ? false : true" />
+                    </div>
+                  </div>
+                  <div class="row my-5">
+                    <div class="col-md-2">
+                      <button type="button" class="btn btn-danger">Danger</button>
+ 
+                  </div>
+                  </div>
+                </div>
+            </div>
+           
+            </div>
+
+
+            </div>
+          </div>
+        </div>
 <!-- nav-bar-end -->
+<div class="alert alert-success" role="alert">
+            <?php
+              if(isset($_GET['submit'])){
+                echo $_GET['submit'];
+              }
+            ?>
+  </div>
 
 <main id="">
             <div class="row row-cols-1 row-cols-md-4 g-4 px-5" id="main"> </div>
@@ -170,6 +260,8 @@ body {
 
 <!-- Modal Hero -->
 
+<div class="alert alert-success" role="alert">
+</div>
 <div class="modal fade bd-example-modal-lg modal-bg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content modal-bg">
@@ -264,12 +356,28 @@ function record_append(data){
   `;
   rowButtons.appendChild(col_details);
 
+  let form = document.createElement("form");
+  form.className+='col-6 button_hero';
+  form.setAttribute("action","inc/products_oop.php");
+  form.setAttribute("Method","POST");
+  form.setAttribute("id","form");
+  rowButtons.appendChild(form);
+
   let col_add = document.createElement("div");
-  col_add.className+=' col-6 button_hero';
+  col_add.className+='submit-form';
+  col_add.setAttribute("onclick","submit("+data.idProduit+")");
+
+  // hidden input 
+  let hidden = document.createElement("input");
+  hidden.setAttribute("type","hidden");
+  hidden.setAttribute("id","hidden");
+  hidden.setAttribute("name","addToCart");
+  hidden.setAttribute("value",data.idProduit);
+  form.appendChild(hidden);  
   col_add.innerHTML =`
   <i class="fa-solid fa-cart-arrow-down"></i><span style='color:#ddd'>Add to Cart</span>
   `;
-  rowButtons.appendChild(col_add);
+  form.appendChild(col_add);
 }
 let data_global ;
 fetch('inc/products_oop.php')
@@ -287,7 +395,11 @@ let details = (id)=>{
   document.getElementById("detail-description").innerText = found.description;
   document.getElementById("detail-prix").innerText = found.prix+' ,00$';
 }
-
+function submit(id){
+  let form = document.getElementById("form");
+  document.getElementById("hidden").value = id;
+  form.submit();
+}
 
 </script>
 </body>

@@ -1,4 +1,4 @@
-/*CREATE TABLE client(
+CREATE TABLE client(
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	firstname VARCHAR(255) NOT NULL ,
 	lastname VARCHAR(255) NOT NULL,
@@ -7,11 +7,11 @@
 	email VARCHAR(255) NOT NULL,
 	password VARCHAR(255) NOT NULL
 );
-*/
+
 
 
 CREATE TABLE `commande` (
-`idCommande` varchar(254) NOT NULL,
+`idCommande` INT  NOT NULL ,
 `date` datetime DEFAULT NULL,
 `adresseLivraison` varchar(254) DEFAULT NULL,
 `idClient` int(11) DEFAULT NULL
@@ -24,9 +24,10 @@ CREATE TABLE `commande` (
 --
 
 CREATE TABLE `detailscommande` (
-  `idCommande` varchar(254) NOT NULL,
+  idCommande INT AUTO_INCREMENT NOT NULL ,
   `idProduit` varchar(254) NOT NULL,
-  `quantite` int(11) DEFAULT NULL
+  `quantite` int(11) DEFAULT NULL,
+  PRIMARY KEY (idCommande)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -48,7 +49,8 @@ CREATE TABLE `produit` (
 --
 -- Dumping data for table `produit`
 --
-
+ALTER TABLE detailscommande ADD image VARCHAR(255) NOT NULL;
+ALTER TABLE detailscommande ADD libelle VARCHAR(255) NOT NULL;
 INSERT INTO `produit` (`idProduit`, `libelle`, `description`, `prix`, `stock`, `image`, `Promo`) VALUES
 ('1', 'Mens Skin Care Set', 'Mens Skin Care Set, Organic Skin Care for Men with Natural Face Wash, Body Wash, Exfoliating Face Scrub and Anti Aging Face Moisturizer, Our Mens Grooming Kit Refreshes Skin, Hydrates and Fights Acne', '130', 10, 'products/pack1.png', 1),
 ('10', 'Deluxe Hand & Body Lotion', 'A lightweight scented hand and body lotion with Aloe Vera and Oatmeal.', '11', 9, 'products/product 5.png', 1),

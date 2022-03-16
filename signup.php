@@ -129,8 +129,7 @@
                 <input type="email" class="form-control input-login" style="" id="email" name="email" placeholder="email" requied>
             </div>
             <div class="col-md-5">
-                <input type="password" class="form-control input-login" style="" id="password" name="password" placeholder="password" title="1char.2numbers .."  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$
-" required>
+                <input type="password" class="form-control input-login" style="" id="password" name="password" placeholder="password" title="1char.2numbers .."  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" required>
             </div>
         </div>
         <div class="form-group row"> 

@@ -51,8 +51,7 @@ class Costumor{
                                                        '$this->phone'
                                                     );";
                             $this-> result =  mysqli_query($this->conn,$this->sql);
-                            // header("Location:../signup.php?success=Done !");
-                            echo $this->sql;
+                            header("Location:../signup.php?success=Done !");
                             }
                  
    }
@@ -63,7 +62,7 @@ class Costumor{
             SELECT id,firstname,email,password FROM client WHERE email = '$this->user_email' 
             AND password = '$this->user_password';
         ";
-        echo $this->sql;
+        
    
 	
 	$this-> result =  mysqli_query($this->conn,$this->sql);   
@@ -98,7 +97,6 @@ if(isset($_POST['register'])){
     $phone = test_input($_POST['phone']);
     $email = test_input($_POST['email']);
     $password = md5($_POST['password']);
-    
     $costumor-> create_user($first_name,$lastname,$email,$password,$address,$phone);
 }
 

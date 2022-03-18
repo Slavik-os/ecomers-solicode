@@ -173,8 +173,9 @@ body {
 <div class="modal fade bd-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content modal-bg">
-              <form action="confirm.php" method="POST" id="command_form">
-              <input type="submit" class="btn btn-success" name="confirm_command" >Comfirm</button>
+              <form action="inc/products_oop.php" method="POST" id="command_form">
+              <!-- <input type="submit" class="btn btn-success" name="confirm_command" >Comfirm</button> -->
+              <input type="hidden" name="confirm_command">
               </form>
               <Button class="btn btn-success" onclick='confirm()'>Submit</Button>
               <div class="row">
@@ -205,9 +206,36 @@ body {
             ?>
  
 
-<main id="">
-            <div class="row row-cols-1 row-cols-md-4 g-4 px-5" id="main"> </div>
-</main>
+
+
+<div class="container mt-5">
+              <div class="row">
+                  
+                    <div class="form-group row"> 
+            <div class="col-md-5">
+                <label for="confirm address" style="color :#fff">Confirm Address :</label>
+                <input type="text" name="confirm_address" value="<?php echo $_SESSION['address']?>" class="form-control input-login" style="" id="exampleInputEmail1" name="firstname" placeholder="first name" required>
+            </div>
+
+                <input type="submit" class="btn btn-success mt-5" name="confirm_command" onclick="submited()"></button>
+                  <?php
+                    if(isset($_GET['submited'])){
+                      echo '
+                      <div class="alert alert-success mt-5" role="alert">
+                      '.$_GET['submited'].'
+                    </div>
+                      ';
+                    }
+                  ?>
+                </div>
+
+</div>
+<script>
+    function submited(){
+    let form = document.getElementById("command_form");
+    form.submit();
+}
+</script>
 
 <!-- Modal Hero -->
 
@@ -250,94 +278,7 @@ let close_login = ()=>{
     document.getElementById("login_box").style.display="None";
 }
 
-function record_append(data){
-  // create and append Elements
 
-  let main = document.getElementById("main");
-  let row = document.createElement("div");
-  row.className += '';
-  main.appendChild(row);
-
-
-  let div_parent = document.createElement("div");
-  div_parent.classList.add("col");
-  row.appendChild(div_parent);
-
-  let div_card = document.createElement("div");
-  div_card.classList.add("card");
-  div_card.className +=' h-50 black-holder';
-  div_parent.appendChild(div_card);
-
-  let img = document.createElement("img");
-  img.src=data.image;
-  img.className +=' img-card card-img-top'
-  div_card.appendChild(img);
-
-  let card_body = document.createElement("div");
-  card_body.className += ' card-body text-center black-holder';
-  div_card.appendChild(card_body);
-
-
-  let h5 = document.createElement("span");
-  h5.innerText = data.libelle;
-  h5.className=' text-center description-card'
-  card_body.appendChild(h5);
-
-  let p = document.createElement("p");
-  p.className+= ' card-text detail-card text-center white-holder';
-  p.innerText = data.prix+' ,00$';
-  card_body.appendChild(p);
-
-  // Create Buttons :
-
-  let rowButtons = document.createElement("div");
-  rowButtons.className +=' row';
-  card_body.appendChild(rowButtons);
-
-  let col_details = document.createElement("div");
-  col_details.className+=' col-4 button_hero';
-
-  col_details.setAttribute("onclick",'details('+data.idProduit+')'); // details Function
-  col_details.setAttribute("data-toggle","modal");
-  col_details.setAttribute("data-target",".bd-example-modal-lg");
-  col_details.innerHTML = `
-   <i class="fa-solid fa-eye"></i> <span style='color:#ddd'>Details</span>
-  `;
-  rowButtons.appendChild(col_details);
-
-  let form = document.createElement("form");
-  form.className+='col-6 button_hero';
-  form.setAttribute("action","inc/products_oop.php");
-  form.setAttribute("Method","POST");
-  form.setAttribute("id","form");
-  rowButtons.appendChild(form);
-
-  let col_add = document.createElement("div");
-  col_add.className+='submit-form';
-  col_add.setAttribute("onclick","submit("+data.idProduit+")");
-
-  // hidden input 
-  let hidden = document.createElement("input");
-  hidden.setAttribute("type","hidden");
-  hidden.setAttribute("id","hidden");
-  hidden.setAttribute("name","addToCart");
-  hidden.setAttribute("value",data.idProduit);
-  form.appendChild(hidden);  
-  col_add.innerHTML =`
-  <i class="fa-solid fa-cart-arrow-down"></i><span style='color:#ddd'>Add to Cart</span>
-  `;
-  form.appendChild(col_add);
-}
-let data_global ;
-// Fetch products
-fetch('inc/products_oop.php')
-  .then(response => response.json())
-  .then((data)=>{
-    for (let i=0; i < data.length ; i++){
-      record_append(data[i]);
-      data_global = data;
-    }
-  });
 
 let command_append = (data)=>{
   let form = document.getElementById("command_form");
@@ -364,6 +305,7 @@ let command_append = (data)=>{
   row_mt_5.innerHTML =`
   ${data.prix} $ <input class="ml-2" type="number"  value="1" name="number_product[]" min="1" max="${data.stock}" style=" width: 80px;" onkeydown="javascript: return event.keyCode == 69 ? false : true" />
   <input type="hidden" name="id_command[]" value=${data.idCommande}>
+  <input type="hidden" name="id_product[]" value="${data.idProduit}">
   `;
   row.appendChild(row_mt_5);
 

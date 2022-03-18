@@ -53,25 +53,19 @@ body {
     background-size: cover;
     width: 100%;
     height: 100vh;
-    animation : changeBg 9s infinite;
-    animation-direction: alternate;
-    animation-delay: 3s;
+    animation : changeBg 8s infinite;
+    animation-direction:alternate ;
+    animation-delay: 2s;
 }
 
 @keyframes changeBg{
-   0% {background-image: url("assets/2.png");}
-   5% {background-image: url("assets/3.png");background-size: cover ;}
-   10% {background-image: url("assets/4.png");background-size: cover ;}
-   15% {background-image: url("assets/5.png");background-size: cover ;}
-   20% {background-image: url("assets/6.png");background-size: cover ;}
-   25% {background-image: url("assets/7.png");background-size: cover ;}
-   30% {background-image: url("assets/8.png");background-size: cover ;}
-   35% {background-image: url("assets/9.png");background-size: cover ;}
-   40% {background-image: url("assets/10.png");background-size: cover ;}
-   45% {background-image: url("assets/11.png");background-size: cover ;}
-   50% {background-image: url("assets/12.png");background-size: cover ;}
-   55% {background-image: url("assets/13.png");background-size: cover ;}
-   60% {background-image: url("assets/14.png");background-size: cover ;}
+  10% {background-image: url("assets/15.png");background-size: cover ;}
+  20% {background-image: url("assets/7.png");background-size: cover ;}
+  40% {background-image: url("assets/10.png");background-size: cover ;}
+  60% {background-image: url("assets/14.png");background-size: cover ;}
+  80% {background-image: url("assets/16.png");background-size: cover ;}
+  100% {background-image: url("assets/4.png");background-size: cover ;}
+   /* 60% {background-image: url("assets/14.png");background-size: cover ;}
    65% {background-image: url("assets/15.png");background-size: cover ;}
    70% {background-image: url("assets/16.png");background-size: cover ;}
    75% {background-image: url("assets/17.png");background-size: cover ;}
@@ -79,7 +73,7 @@ body {
    85% {background-image: url("assets/19.png");background-size: cover ;}
    90% {background-image: url("assets/20.png");background-size: cover ;}
    95% {background-image: url("assets/21.png");background-size: cover ;}
-   100% {background-image: url("assets/22.png");background-size: cover ;}
+   100% {background-image: url("assets/22.png");background-size: cover ;}  */
 
 }
 

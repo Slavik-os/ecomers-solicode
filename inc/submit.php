@@ -59,7 +59,7 @@ class Costumor{
         $this->user_password =mysqli_real_escape_string($this->conn,$user_password);
         $this->user_email = mysqli_real_escape_string($this->conn,$user_email);
         $this-> sql = "
-            SELECT id,firstname,email,password FROM client WHERE email = '$this->user_email' 
+            SELECT id,firstname,email,address,password FROM client WHERE email = '$this->user_email' 
             AND password = '$this->user_password';
         ";
         
@@ -73,6 +73,7 @@ class Costumor{
 		$_SESSION['id'] = $this->row['id'];
 		$_SESSION['email'] = $this->row['email'];
 		$_SESSION['firstname'] = $this->row['firstname'];
+        $_SESSION['address'] = $this->row['address'];
 
 	}else {
 		header("Location:../index.php?error=no records found !");

@@ -1,12 +1,12 @@
-CREATE TABLE client(
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	firstname VARCHAR(255) NOT NULL ,
-	lastname VARCHAR(255) NOT NULL,
-	address VARCHAR(255) NOT NULL,
-	phone VARCHAR(255) NOT NULL,
-	email VARCHAR(255) NOT NULL,
-	password VARCHAR(255) NOT NULL
-);
+-- CREATE TABLE client(
+-- 	id INT AUTO_INCREMENT PRIMARY KEY,
+-- 	firstname VARCHAR(255) NOT NULL ,
+-- 	lastname VARCHAR(255) NOT NULL,
+-- 	address VARCHAR(255) NOT NULL,
+-- 	phone VARCHAR(255) NOT NULL,
+-- 	email VARCHAR(255) NOT NULL,
+-- 	password VARCHAR(255) NOT NULL
+-- );
 
 
 
@@ -27,6 +27,8 @@ CREATE TABLE `detailscommande` (
   idCommande INT AUTO_INCREMENT NOT NULL ,
   `idProduit` varchar(254) NOT NULL,
   `quantite` int(11) DEFAULT NULL,
+  `stock` INT NOT NULL ,
+  prix decimal(8,0) NOT NULL ,
   PRIMARY KEY (idCommande)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
